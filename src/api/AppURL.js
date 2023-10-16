@@ -7,7 +7,17 @@ class AppURL {
 	static AllCategoryDetails = this.BaseURL + "getCategories";
 	static getAllFeaturedCategory = this.BaseURL + "getAllFeaturedCategory";
 
-	static categoryImagePath = this.ImageURL + 'category/original/'
+	static categoryImagePath = this.ImageURL + 'category/original/';
+
+	static ProductListByCategory(categoryid) {
+		return this.BaseURL + "getProductsByCategoryId/" + categoryid;
+	}
+
+	static productImagePath = this.ImageURL + 'products/';
+	
+	static getProductsById(pid) {
+		return this.BaseURL + "getProductsById/" + pid;
+	}
 }
 
 export default AppURL;

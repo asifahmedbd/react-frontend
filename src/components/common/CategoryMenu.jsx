@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import AppURL from "../../api/AppURL";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class CategoryMenu extends Component {
 
@@ -34,17 +35,17 @@ class CategoryMenu extends Component {
           <h6 className="m-0">Categories</h6>
           <i className="fa fa-angle-down text-dark" />
         </a>
-        <nav className="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+        <nav className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style={{width: 'calc(100% - 30px)', zIndex: 1}}>
           <div className="navbar-nav w-100 overflow-hidden" style={{height: '410px'}}>
-            {Object.keys(CategoryList).map((key) => {
+            {Object.keys(CategoryList).map((key, i) => {
             return (
-            <div className="nav-item dropdown">
+            <div className="nav-item dropdown" key={i}>
               <a href="#" className="nav-link" data-toggle="dropdown">{CategoryList[key].category_name} <i className="fa fa-angle-down float-right mt-1" /></a>
               {CategoryList[key].subcategory ?
                 <div className="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                  {Object.keys(CategoryList[key].subcategory).map((sub) => {
+                  {Object.keys(CategoryList[key].subcategory).map((sub, j) => {
                     return (
-                      <a href className="dropdown-item">{CategoryList[key].subcategory[sub].category_name}</a>
+                      <Link className="dropdown-item" key={j} to={"/shop/" + sub}>{CategoryList[key].subcategory[sub].category_name}</Link>
                     )  
                   })}
                 </div>
