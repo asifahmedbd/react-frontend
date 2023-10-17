@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import Topbar from "../components/common/Topbar";
 import Footer from "../components/common/Footer";
 import CategoryMenu from "../components/common/CategoryMenu";
@@ -8,30 +8,31 @@ import PageHeader from "../components/common/PageHeader";
 import Products from "../components/common/Products";
 import { useParams } from "react-router-dom";
 
-class ShopByCategory extends Component {
+function ShopByCategory() {
+	// Get the current full URL
+	const fullUrl = window.location.href;
+	let { category } = useParams();
+	console.log("cat - ",category," url - ",fullUrl);
 
-  	render() {
-  		const categoryId = window.location.href.split('/')[4];
-  		console.log(categoryId);
-		return (
-		    <Fragment>
-				<Topbar />
-				<div className="container-fluid mb-5">
-					<div className="row border-top px-xl-5">
-						<Fragment>
-							<CategoryMenu />
-							<div className="col-lg-9">
-								<Topmenu />
-							</div>
-						</Fragment>
-					</div>
+	return (
+	    <Fragment>
+			<Topbar />
+			<div className="container-fluid mb-5">
+				<div className="row border-top px-xl-5">
+					<Fragment>
+						<CategoryMenu />
+						<div className="col-lg-9">
+							<Topmenu />
+						</div>
+					</Fragment>
 				</div>
-				<PageHeader />
-				<Products categoryId={categoryId} />
-				<Footer />
-			</Fragment>
-		);
-	}
+			</div>
+			<PageHeader />
+			<Products categoryId={category} />
+			<Footer />
+		</Fragment>
+	);
+
 }
 
 export default ShopByCategory;

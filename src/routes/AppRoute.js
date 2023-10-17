@@ -13,7 +13,7 @@ class AppRoute extends Component {
 				<Routes>
 	          		<Route path="/" element={<HomePage />} />
 	          		<Route path="/FAQ" element={<FAQ />} />
-	          		<Route path="/shop/:category" element={<ShopByCategory key={Date.now()} />} />
+	          		<Route path="/shop/:category" element={<ShopByCategory />} />
 	          		<Route path="/productdetails/:id" element={<ProductDetails />} />
 	          	</Routes>
       		</Fragment>

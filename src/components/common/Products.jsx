@@ -1,34 +1,28 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import AppURL from "../../api/AppURL";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-class Products extends Component {
-	
-  constructor() {
-    super();
-    this.state = {
-      ProductData: [],
+
+function Products({ categoryId }) {
+  const [ProductData, setProductData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(AppURL.ProductListByCategory(categoryId));
+        setProductData(response.data);
+      } catch (error) {
+        // Handle the error as needed
+      }
     };
-  }
 
-  componentDidMount() {
-    const cid = this.props.categoryId;
-    axios
-      .get(AppURL.ProductListByCategory(cid))
-      .then((response) => {
-        console.log(response.data);
-        this.setState({
-          ProductData: response.data,
-        });
-      })
-      .catch((error) => {});
-  }
+    fetchData();
+  }, [categoryId]); // Run this effect whenever categoryId changes
 
+  console.log('Category ID: ', categoryId);
 
-	render() {
-      const ProductList = this.state.ProductData;
-	    return (
+	 return (
 	    	<div className="col-lg-12 col-md-12">
         <div className="row pb-3">
           <div className="col-12 pb-1">
@@ -55,9 +49,9 @@ class Products extends Component {
               </div>
             </div>
           </div>
-          {Object.keys(ProductList).map((key, i) => {
-            const pid = ProductList[key].product_id;
-            const image_path = AppURL.productImagePath+pid+'/original/'+ProductList[key].product_images.feature_image;
+          {Object.keys(ProductData).map((key, i) => {
+            const pid = ProductData[key].product_id;
+            const image_path = AppURL.productImagePath+pid+'/original/'+ProductData[key].product_images.feature_image;
             return (
               <div className="col-lg-4 col-md-6 col-sm-12 pb-1">
                 <div className="card product-item border-0 mb-4">
@@ -65,9 +59,9 @@ class Products extends Component {
                     <img className="img-fluid w-100" src={image_path} alt="" />
                   </div>
                   <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                    <h6 className="text-truncate mb-3">{ProductList[key].product_title}</h6>
+                    <h6 className="text-truncate mb-3">{ProductData[key].product_title}</h6>
                     <div className="d-flex justify-content-center">
-                      <h6>${ProductList[key].product_price}</h6><h6 className="text-muted ml-2"><del></del></h6>
+                      <h6>${ProductData[key].product_price}</h6><h6 className="text-muted ml-2"><del></del></h6>
                     </div>
                   </div>
                   <div className="card-footer d-flex justify-content-between bg-light border">
@@ -79,8 +73,7 @@ class Products extends Component {
           })}
         </div>
       </div>
-	    )
-	}
+	 )
 }
 
 export default Products;
