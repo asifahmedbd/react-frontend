@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import classes from "./Topbar.module.css";
+import CartIcon from "./cart-icon/cart-icon.component";
 
 class Topbar extends Component {
 
@@ -61,10 +62,7 @@ class Topbar extends Component {
               <i className="fas fa-heart text-primary" />
               <span className="badge">0</span>
             </a>
-            <a href className="btn border">
-              <i className="fas fa-shopping-cart text-primary" />
-              <span className="badge">0</span>
-            </a>
+            <CartIcon />
           </div>
         </div>
       </div>
