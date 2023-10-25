@@ -17,12 +17,10 @@ function ProductItems({ productId }) {
     try {
       const response = await axios.get(AppURL.getProductsById(productId));
       setProductDetails(response.data);
-      const featuresImage = ProductDetails.product_images && ProductDetails.product_images.feature_image;
+      const featuresImage = response.data.product_images && response.data.product_images.feature_image;
       setFeatureImage(featuresImage);
-      console.log('ProductDetails', ProductDetails);	
-      console.log('FeatureImage', featureImage);
-
-			const imageArrayJSON  = ProductDetails.product_images && ProductDetails.product_images.gallery_images;
+      
+			const imageArrayJSON  = response.data.product_images && response.data.product_images.gallery_images;
 
 			setGalleryImages(JSON.parse(imageArrayJSON));
 
