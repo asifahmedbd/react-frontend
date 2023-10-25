@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import classes from "./Topbar.module.css";
 import CartIcon from "./cart-icon/cart-icon.component";
+import CartDropdown from "./cart-dropdown/cart-dropdown.component";
+import { CartContext } from "../contexts/cart.context";
 
-class Topbar extends Component {
+const Topbar = () => {
+  const {isCartOpen} = useContext(CartContext);
 
-  render() {
     return (
       <div className="container-fluid">
         <div className="row bg-secondary py-2 px-xl-5">
@@ -63,11 +65,12 @@ class Topbar extends Component {
               <span className="badge">0</span>
             </a>
             <CartIcon />
+            { isCartOpen && <CartDropdown />}
           </div>
         </div>
       </div>
     );
-  }
+
 }
 
 export default Topbar;

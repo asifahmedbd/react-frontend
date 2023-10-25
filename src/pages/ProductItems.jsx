@@ -1,7 +1,8 @@
-import React, { Component, Fragment, useState, useEffect } from "react";
+import React, { Component, Fragment, useState, useEffect, useContext } from "react";
 import AppURL from "../api/AppURL";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { CartContext } from "../components/contexts/cart.context";
 
 function ProductItems({ productId }) {
 	console.log(productId);
@@ -13,18 +14,18 @@ function ProductItems({ productId }) {
 	const main_image_path = AppURL.productImagePath+productId+'/original/';
 	const galler_image_path = AppURL.productImagePath+productId+'/gallery_images/';
 
+	const { addItemToCart } = useContext(CartContext);
+
 	const fetchData = async () => {
     try {
-      const response = await axios.get(AppURL.getProductsById(productId));
-      setProductDetails(response.data);
-      const featuresImage = ProductDetails.product_images && ProductDetails.product_images.feature_image;
-      setFeatureImage(featuresImage);
-      console.log('ProductDetails', ProductDetails);	
-      console.log('FeatureImage', featureImage);
+		const response = await axios.get(AppURL.getProductsById(productId));
+		setProductDetails(response.data);
+		const featuresImage = response.data.product_images && response.data.product_images.feature_image;
+		setFeatureImage(featuresImage);
 
-			const imageArrayJSON  = ProductDetails.product_images && ProductDetails.product_images.gallery_images;
+		const imageArrayJSON  = response.data.product_images && response.data.product_images.gallery_images;
 
-			setGalleryImages(JSON.parse(imageArrayJSON));
+		setGalleryImages(JSON.parse(imageArrayJSON));
 
 
     } catch (error) {
@@ -41,7 +42,7 @@ function ProductItems({ productId }) {
 
 	console.log('ProductDetails Bottom', ProductDetails);	
 	
-	
+	const addProductToCart = () => addItemToCart(ProductDetails);
 
 	return (
 		<div className="container-fluid pt-5">
@@ -147,7 +148,7 @@ function ProductItems({ productId }) {
 		              </button>
 		            </div>
 		          </div>
-		          <button className="btn btn-primary px-3"><i className="fa fa-shopping-cart mr-1" /> Add To Cart</button>
+		          <button className="btn btn-primary px-3" onClick={addProductToCart}><i className="fa fa-shopping-cart mr-1" /> Add To Cart</button>
 		        </div>
 		        <div className="d-flex pt-2">
 		          <p className="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
