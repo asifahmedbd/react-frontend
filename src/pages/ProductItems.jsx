@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../components/contexts/cart.context";
 
 function ProductItems({ productId }) {
-	console.log(productId);
+	//console.log(productId);
 	const [ProductDetails, setProductDetails] = useState([]);
 	const [featureImage, setFeatureImage] = useState([]);
 	const [galleryImages, setGalleryImages] = useState([]);
@@ -41,7 +41,7 @@ function ProductItems({ productId }) {
   }, [productId]); // Run this effect whenever categoryId changes
 
 
-	console.log('ProductDetails Bottom', ProductDetails);	
+	//console.log('ProductDetails Bottom', ProductDetails);	
 	
 	const addProductToCart = () => addItemToCart(ProductDetails);
 
