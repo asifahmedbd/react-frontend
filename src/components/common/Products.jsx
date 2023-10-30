@@ -20,7 +20,7 @@ function Products({ categoryId }) {
     fetchData();
   }, [categoryId]); // Run this effect whenever categoryId changes
 
-  console.log('Category ID: ', categoryId);
+  console.log('Product Data: ', ProductData);
 
 	 return (
 	    	<div className="col-lg-12 col-md-12">

@@ -13,7 +13,7 @@ function ProductDetails(props) {
 
   	const { id } = useParams();
   
-  	const [productId, setName] = useState(id);
+  	const [productId, setProductId] = useState(id);
 
 	return (
 	    <Fragment>
