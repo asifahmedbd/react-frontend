@@ -9,6 +9,8 @@ class AppURL {
 
 	static categoryImagePath = this.ImageURL + 'category/original/';
 
+	static submitOrderDetails = this.BaseURL + "submitOrderDetails";
+
 	static ProductListByCategory(categoryid) {
 		return this.BaseURL + "getProductsByCategoryId/" + categoryid;
 	}

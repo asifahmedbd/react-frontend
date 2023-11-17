@@ -34,7 +34,7 @@ class ProductItems extends Component {
 			const featureImage = pdetails.product_images && pdetails.product_images.feature_image;
 			const imageArrayJSON  = pdetails.product_images && pdetails.product_images.gallery_images;
 			const galleryImages = JSON.parse(imageArrayJSON);
-	    console.log(galleryImages);
+	    	console.log(galleryImages);
 
 			return (
 	    	<div className="container-fluid pt-5">
